@@ -1,10 +1,15 @@
-package pl.javastart.sellegro.auction;
+package pl.javastart.sellegro.auction.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.javastart.sellegro.auction.Auction;
+import pl.javastart.sellegro.auction.AuctionFilters;
+import pl.javastart.sellegro.auction.AuctionService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Controller

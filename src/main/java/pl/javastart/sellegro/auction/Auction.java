@@ -1,22 +1,29 @@
 package pl.javastart.sellegro.auction;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Auction {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String carMake;
+    private String carMaker;
     private String carModel;
     private String color;
     private BigDecimal price;
     private LocalDate endDate;
 
-    public Auction(Long id, String title, String carMake, String carModel, String color, BigDecimal price, LocalDate endDate) {
+    public Auction(){}
+
+    public Auction(Long id, String carMaker, String carModel, String color, BigDecimal price, LocalDate endDate) {
         this.id = id;
-        this.title = title;
-        this.carMake = carMake;
+        this.carMaker = carMaker;
         this.carModel = carModel;
         this.color = color;
         this.price = price;
@@ -31,20 +38,12 @@ public class Auction {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCarMaker() {
+        return carMaker;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCarMake() {
-        return carMake;
-    }
-
-    public void setCarMake(String carMake) {
-        this.carMake = carMake;
+    public void setCarMake(String carMaker) {
+        this.carMaker = carMaker;
     }
 
     public String getCarModel() {
