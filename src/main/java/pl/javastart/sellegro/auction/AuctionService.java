@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import pl.javastart.sellegro.auction.repository.AuctionRepository;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,6 +22,8 @@ public class AuctionService {
         String carMaker = auctionFilters.getCarMaker();
         String carModel = auctionFilters.getCarModel();
         String color = auctionFilters.getColor();
+        BigDecimal price = auctionFilters.getPrice();
+        LocalDate endDate = auctionFilters.getEndDate();
 
         if (!StringUtils.isEmpty(carMaker)) {
             auctions = auctionRepository.findByCarMakerIsContainingIgnoreCase(carMaker);
@@ -27,6 +31,10 @@ public class AuctionService {
             auctions = auctionRepository.findByCarModelContainingIgnoreCase(carModel);
         } else if (!StringUtils.isEmpty(color)) {
             auctions = auctionRepository.findByColorContainingIgnoreCase(color);
+        } else if (!StringUtils.isEmpty(price)) {
+            auctions = auctionRepository.findByPriceLessThanEqual(price);
+        } else if (endDate != null) {
+            auctions = auctionRepository.findByEndDateBefore(endDate);
         } else {
             auctions = auctionRepository.findAll();
         }

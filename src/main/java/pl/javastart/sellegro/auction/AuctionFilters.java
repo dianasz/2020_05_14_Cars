@@ -1,10 +1,19 @@
 package pl.javastart.sellegro.auction;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 public class AuctionFilters {
 
     private String carMaker;
     private String carModel;
     private String color;
+    private BigDecimal price;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 
     public String getCarMaker() {
         return carMaker;
@@ -30,4 +39,19 @@ public class AuctionFilters {
         this.color = color;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 }
