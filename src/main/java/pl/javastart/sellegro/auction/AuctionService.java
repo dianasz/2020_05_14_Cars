@@ -22,11 +22,11 @@ public class AuctionService {
         String color = auctionFilters.getColor();
 
         if(!StringUtils.isEmpty(carMaker)){
-            auctions = auctionRepository.findByCarMakerIgnoreCase(carMaker);
+            auctions = auctionRepository.findByCarMakerIsContainingIgnoreCase(carMaker);
         } else if (!StringUtils.isEmpty(carModel)){
-            auctions = auctionRepository.findByCarModelIgnoreCase(carModel);
+            auctions = auctionRepository.findByCarModelContainingIgnoreCase(carModel);
         } else if (!StringUtils.isEmpty(color)){
-            auctions = auctionRepository.findByColorIgnoreCase(color);
+            auctions = auctionRepository.findByColorContainingIgnoreCase(color);
         } else {
             auctions = auctionRepository.findAll();
         }
@@ -35,6 +35,7 @@ public class AuctionService {
 
     public List<Auction> findAllSorted(String sort) {
         List<Auction> auctions;
+
         if (sort.equalsIgnoreCase("carMaker")){
             auctions = auctionRepository.findAllByOrderByCarMaker();
         } else if (sort.equalsIgnoreCase("carModel")){

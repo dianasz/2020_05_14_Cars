@@ -11,11 +11,11 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     List<Auction> findAllByOrderByPriceDesc(Pageable pageable);
 
-    List<Auction> findByCarMakerIgnoreCase(String carMaker);
+    List<Auction> findByCarMakerIsContainingIgnoreCase(String letters);
 
-    List<Auction> findByCarModelIgnoreCase(String carModel);
+    List<Auction> findByCarModelContainingIgnoreCase(String letters);
 
-    List<Auction> findByColorIgnoreCase(String color);
+    List<Auction> findByColorContainingIgnoreCase(String letters);
 
     List<Auction> findAllByOrderByCarMaker();
 
