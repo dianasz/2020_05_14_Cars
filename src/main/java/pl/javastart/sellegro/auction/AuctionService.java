@@ -21,11 +21,11 @@ public class AuctionService {
         String carModel = auctionFilters.getCarModel();
         String color = auctionFilters.getColor();
 
-        if(!StringUtils.isEmpty(carMaker)){
+        if (!StringUtils.isEmpty(carMaker)) {
             auctions = auctionRepository.findByCarMakerIsContainingIgnoreCase(carMaker);
-        } else if (!StringUtils.isEmpty(carModel)){
+        } else if (!StringUtils.isEmpty(carModel)) {
             auctions = auctionRepository.findByCarModelContainingIgnoreCase(carModel);
-        } else if (!StringUtils.isEmpty(color)){
+        } else if (!StringUtils.isEmpty(color)) {
             auctions = auctionRepository.findByColorContainingIgnoreCase(color);
         } else {
             auctions = auctionRepository.findAll();
@@ -36,18 +36,25 @@ public class AuctionService {
     public List<Auction> findAllSorted(String sort) {
         List<Auction> auctions;
 
-        if (sort.equalsIgnoreCase("carMaker")){
-            auctions = auctionRepository.findAllByOrderByCarMaker();
-        } else if (sort.equalsIgnoreCase("carModel")){
-            auctions = auctionRepository.findAllByOrderByCarModel();
-        } else if (sort.equalsIgnoreCase("price")){
-            auctions = auctionRepository.findAllByOrderByPrice();
-        } else if (sort.equalsIgnoreCase("color")){
-            auctions = auctionRepository.findAllByOrderByColor();
-        } else if (sort.equalsIgnoreCase("endDate")){
-            auctions = auctionRepository.findAllByOrderByEndDate();
-        } else {
-            auctions = auctionRepository.findAll();
+        switch (sort) {
+            case "carMaker":
+                auctions = auctionRepository.findAllByOrderByCarMaker();
+                break;
+            case "carModel":
+                auctions = auctionRepository.findAllByOrderByCarModel();
+                break;
+            case "price":
+                auctions = auctionRepository.findAllByOrderByPrice();
+                break;
+            case "color":
+                auctions = auctionRepository.findAllByOrderByColor();
+                break;
+            case "endDate":
+                auctions = auctionRepository.findAllByOrderByEndDate();
+                break;
+            default:
+                auctions = auctionRepository.findAll();
+                break;
         }
         return auctions;
     }
